@@ -8,6 +8,8 @@ train:
 
 teacher_model:
   model_name_or_path: Qwen/Qwen2.5-7B-Instruct
+  # The tutor must run locally so its weights can be updated
+  use_siliconflow: false
   vllm:
     temperature: 1.0
     max_length: 12000
@@ -21,6 +23,7 @@ teacher_model:
 
 student_model:
   model_name_or_path: neuralmagic/Meta-Llama-3.1-8B-Instruct-FP8
+  use_siliconflow: true
   vllm:
     temperature: 0.6
     max_length: 12000
@@ -34,6 +37,7 @@ student_model:
 
 judge_model:
   model_name_or_path: Qwen/Qwen2.5-14B-Instruct-AWQ
+  use_siliconflow: true
   vllm:
     temperature: 0.6
     max_length: 12000
@@ -46,6 +50,7 @@ judge_model:
 
 reward_model:
   model_name_or_path: Answer # If we set this to None we get the -r_sol run.
+  use_siliconflow: false
 
 huggingface:
   name: <huggingface_name>
