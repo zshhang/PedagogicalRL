@@ -42,6 +42,7 @@ class TeacherModelConfig:
     model_name_or_path: str = "Qwen/Qwen2.5-7B-Instruct"
     use_openrouter: bool = False
     use_gemini: bool = False
+    use_siliconflow: bool = False
     vllm: ModelvLLMConfig = field(default_factory=ModelvLLMConfig)
     lora: LoraConfig = field(default_factory=LoraConfig)
 
@@ -51,6 +52,7 @@ class StudentModelConfig:
     model_name_or_path: str = "neuralmagic/Meta-Llama-3.1-8B-Instruct-FP8"
     use_openrouter: bool = False
     use_gemini: bool = False
+    use_siliconflow: bool = False
     vllm: ModelvLLMConfig = field(default_factory=ModelvLLMConfig)
 
 
@@ -59,12 +61,14 @@ class JudgeModelConfig:
     model_name_or_path: str = "Qwen/Qwen2.5-14B-Instruct-AWQ"
     use_openrouter: bool = False
     use_gemini: bool = False
+    use_siliconflow: bool = False
     vllm: ModelvLLMConfig = field(default_factory=ModelvLLMConfig)
 
 
 @dataclass
 class RewardModelConfig:
     model_name_or_path: str = "Qwen/Qwen2.5-Math-RM-72B"
+    use_siliconflow: bool = False
     vllm: ModelvLLMConfig = field(default_factory=ModelvLLMConfig)
 
 
