@@ -28,6 +28,7 @@ from src.vllm.data_parallel_vllm import ParallelvLLMInference, InferenceTask
 from src.utils.utils import check_equal, extract_answer
 from src.inference_providers.open_router_inference import OpenRouterInference
 from src.inference_providers.gemini_api_inference import GeminiInference
+from src.inference_providers.siliconflow_inference import SiliconFlowInference
 import logging
 
 logger = logging.getLogger(__name__)
@@ -610,7 +611,11 @@ class Classroom:
         self.reward_model_cfg = reward_model_cfg
         self.generation_cfg = generation_cfg
 
-        if self.teacher_model_cfg.use_openrouter:
+        if self.teacher_model_cfg.use_siliconflow:
+            self.teacher_model = SiliconFlowInference(
+                self.teacher_model_cfg.model_name_or_path
+            )
+        elif self.teacher_model_cfg.use_openrouter:
             self.teacher_model = OpenRouterInference(
                 self.teacher_model_cfg.model_name_or_path
             )
@@ -639,7 +644,11 @@ class Classroom:
             )
         self.teacher_model.sleep()
 
-        if self.student_model_cfg.use_openrouter:
+        if self.student_model_cfg.use_siliconflow:
+            self.student_model = SiliconFlowInference(
+                self.student_model_cfg.model_name_or_path
+            )
+        elif self.student_model_cfg.use_openrouter:
             self.student_model = OpenRouterInference(
                 self.student_model_cfg.model_name_or_path
             )
@@ -667,7 +676,11 @@ class Classroom:
             )
         self.student_model.sleep()
 
-        if self.judge_model_cfg.use_openrouter:
+        if self.judge_model_cfg.use_siliconflow:
+            self.judge_model = SiliconFlowInference(
+                self.judge_model_cfg.model_name_or_path
+            )
+        elif self.judge_model_cfg.use_openrouter:
             self.judge_model = OpenRouterInference(
                 self.judge_model_cfg.model_name_or_path
             )
@@ -693,7 +706,11 @@ class Classroom:
             )
         self.judge_model.sleep()
 
-        if self.reward_model_cfg.model_name_or_path not in ["None", "Answer"]:
+        if self.reward_model_cfg.use_siliconflow:
+            self.reward_model = SiliconFlowInference(
+                self.reward_model_cfg.model_name_or_path
+            )
+        elif self.reward_model_cfg.model_name_or_path not in ["None", "Answer"]:
             self.reward_model = ParallelvLLMInference(
                 model_path=reward_model_cfg.model_name_or_path,
                 gpus_per_instance=reward_model_cfg.vllm.number_of_gpus_per_instance,

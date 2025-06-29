@@ -75,6 +75,10 @@ nano .env
 | `HF_TOKEN`           | Pull/push models from 🤗 Hub        |
 | `WANDB_API_KEY`      | Weights & Biases logging (optional) |
 | `OPENROUTER_API_KEY` | Optional: for LLMs via OpenRouter   |
+| `SILICONFLOW_API_KEY`| Optional: for LLMs via SiliconFlow  |
+
+To run models through SiliconFlow, set `use_siliconflow: true` in the
+corresponding config section and provide the SiliconFlow model name.
 
 ---
 
@@ -151,7 +155,7 @@ lighteval vllm \
 ├── src/
 │   ├── classroom.py          # 🧠 Core RL loop (multi-agent dialog)
 │   ├── grpo/                 # GRPO reinforcement learning trainer
-│   ├── inference_providers/  # OpenRouter / Gemini adapters
+│   ├── inference_providers/  # OpenRouter / Gemini / SiliconFlow adapters
 │   └── vllm/                 # vLLM helpers (multi-node, memory mgmt)
 ├── utils/                    # reward functions, judge filters, logging
 ├── train_rl.py               # Entry point for RL training
