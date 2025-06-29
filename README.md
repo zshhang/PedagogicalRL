@@ -77,6 +77,9 @@ nano .env
 | `OPENROUTER_API_KEY` | Optional: for LLMs via OpenRouter   |
 | `SILICONFLOW_API_KEY`| Optional: for LLMs via SiliconFlow  |
 
+To run models through SiliconFlow, set `use_siliconflow: true` in the
+corresponding config section and provide the SiliconFlow model name.
+
 ---
 
 ## 🎓 Training
